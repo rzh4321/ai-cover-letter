@@ -1,6 +1,7 @@
 'use client';
 
 import NavBar from "@/components/NavBar";
+import Hero from "@/components/Hero";
 import { useRef } from "react";
 
 export default function Home() {
@@ -17,24 +18,26 @@ export default function Home() {
     // const data = await resp.json();
     // setCoverLetter(data.result)
     // setLoading(false)
-    const ref = useRef();
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      const d = new FormData(ref.current);
-      const res = await fetch('/api/form', {
-        method: 'POST',
-        body: d,
-      });
-    }
+    const ref = useRef<null | HTMLDivElement>(null);
+    // const handleSubmit = async (e) => {
+    //   e.preventDefault();
+    //   const d = new FormData(ref.current);
+    //   const res = await fetch('/api/form', {
+    //     method: 'POST',
+    //     body: d,
+    //   });
+    // }
 
   return (
     <>
       <NavBar showCreate={true} />
-      <form ref={ref} onSubmit={handleSubmit}>
+      <Hero exampleRef={ref} />
+      {/* <form ref={ref} onSubmit={handleSubmit}>
         <input name="fullName" />
         <input name="nameOfCompany" />
         <button>submit</button>
-      </form>
+      </form> */}
+      <div ref={ref}>example</div>
     </>
   )
 }
