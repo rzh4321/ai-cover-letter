@@ -18,7 +18,7 @@ export default function NavBar( { showCreate } : { showCreate : boolean }) {
     }
 
     return (
-      <nav className="flex justify-between items-center p-8 w-screen h-3">
+      <div className="flex justify-between items-center py-8 px-5 h-3">
         <span className="text-xl font-bold">COVERED</span>
         <div className="flex gap-2 items-center">
           {showCreate ? 
@@ -27,6 +27,6 @@ export default function NavBar( { showCreate } : { showCreate : boolean }) {
             </Button> : <div>home icon</div>}
           <ModeToggle />
         </div>
-      </nav>
+      </div>
 )
 }

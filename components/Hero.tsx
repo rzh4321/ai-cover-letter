@@ -44,6 +44,20 @@ export default function Hero( {exampleRef } : {exampleRef: MutableRefObject<HTML
                     See example
                 </Button>
             </div>
+            <div className="my-[160px] flex flex-col steps:flex-row gap-12">
+                <div className="flex gap-3">
+                    <span className={`border-1 rounded-sm bg-gray-400 px-2 text-black w-[25px] text-center`}>1</span>
+                    <span>Tell us about yourself</span>
+                </div>
+                <div className="flex gap-3">
+                    <span className={`border-1 rounded-sm bg-gray-400 px-2 text-black w-[25px] text-center`}>2</span>
+                    <span>Generate the cover letter</span>
+                </div>
+                <div className="flex gap-3">
+                    <span className={`border-1 rounded-sm bg-gray-400 px-2 text-black w-[25px] text-center`}>3</span>
+                    <span>Personalize the cover letter</span>
+                </div>
+            </div>
         </main>
       )
 
