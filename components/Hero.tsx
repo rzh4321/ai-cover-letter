@@ -1,21 +1,9 @@
 import { MutableRefObject } from "react";
 import { Button } from "./ui/button";
 import Link from "next/link";
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
 
 
 export default function Hero( {exampleRef } : {exampleRef: MutableRefObject<HTMLDivElement | null>}) {
-    const {theme} = useTheme();
-    const [isMounted, setIsMounted] = useState(false);
-    // fix hydration error
-    useEffect(() => {
-        setIsMounted(true);
-    }, []);
-
-    if (!isMounted) {
-        return null;
-    }
 
     const executeScroll = (ref: MutableRefObject<HTMLDivElement | null>) => {
         if (!ref?.current) {
@@ -26,7 +14,7 @@ export default function Hero( {exampleRef } : {exampleRef: MutableRefObject<HTML
         ref.current.scrollIntoView({ behavior: "smooth" });
     }
     return (
-        <main className="w-full flex justify-center flex-col items-center py-20">
+        <main className="w-full flex justify-center flex-col items-center md:py-20 py-16">
             <h1
             className={`p-1 font-extrabold text-center text-4xl md:text-7xl font-secondary`}
             >
@@ -37,14 +25,15 @@ export default function Hero( {exampleRef } : {exampleRef: MutableRefObject<HTML
                 Find the perfect cover letter for your next job
             </p>  
             <div className="flex gap-2 items-center">
-                <Button asChild className={`md:p-6 md:text-lg duration-200 text-center border-2 ${theme === 'light' ? 'bg-blue-500' : 'bg-blue-300 hover:bg-white'}`}>
+                {/* ${theme === 'light' ? 'bg-blue-500' : 'bg-blue-300 hover:bg-white'} */}
+                <Button asChild className={`md:p-6 md:text-lg duration-200 text-center`}>
                     <Link href="/create">Get started</Link>
                 </Button>
-                <Button onClick={() => executeScroll(exampleRef)} className={`md:text-lg md:p-6 duration-200 border-2 ${theme === 'dark' ? 'bg-black border-white text-white hover:text-black hover:border-white hover:bg-white' : 'bg-white text-black border-black hover:bg-black hover:text-white hover:border-black'}`}>
+                <Button onClick={() => executeScroll(exampleRef)} variant={"seeExample"} className={`md:text-lg md:p-6 duration-200`}>
                     See example
                 </Button>
             </div>
-            <div className="my-[160px] flex flex-col steps:flex-row gap-12">
+            <div className="md:my-[160px] my-[80px] flex flex-col steps:flex-row gap-12">
                 <div className="flex gap-3">
                     <span className={`border-1 rounded-sm bg-gray-400 px-2 text-black w-[25px] text-center`}>1</span>
                     <span>Tell us about yourself</span>

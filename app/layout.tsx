@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { ThemeProvider } from "@/components/theme-provider"
+// import { ThemeProvider } from "@/components/theme-provider"
 
 import './globals.css';
 
@@ -16,14 +16,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <ThemeProvider
+      {/* <ThemeProvider
             attribute="class"
             defaultTheme="system"
-            enableSystem
             disableTransitionOnChange
-          >
+          > */}
         <body className='font-primary'>{children}</body>
-      </ThemeProvider>
+      {/* </ThemeProvider> */}
     </html>
   )
 }
