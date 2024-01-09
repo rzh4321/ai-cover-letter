@@ -15,6 +15,9 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input";
 import TextAreaWithLimit from "@/components/TextAreaWIthLimit";
+import { useToast } from "@/components/ui/use-toast";
+import { useState } from "react";
+
 
 const formSchema = z.object({
     fullName: z.string().min(1, {message: "Name is required"}).max(25, {message: "Full name cannot exceed 25 characters"}),
@@ -41,9 +44,32 @@ export default function Create() {
           reason: "",
         },
       })
+      const {toast } = useToast();
+      const [coverLetter, setCoverLetter] = useState<string | null>(null);
+      const [loading, setLoading] = useState(false);
 
-      function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log(values)
+      async function onSubmit(values: z.infer<typeof formSchema>) {
+        setLoading(true);
+        console.log(values);
+        const resp = await fetch('/api/form', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(values)
+        });
+        const data = await resp.json();
+        if (!resp.ok) {
+            toast({
+                title: data.error,
+                description: data.desc,
+              })
+        }
+        else {
+            console.log('data is ', data);
+            setCoverLetter(data.result)
+            setLoading(false)
+        }
       }
 
       return (
