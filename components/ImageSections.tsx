@@ -1,20 +1,13 @@
 import { useRouter } from "next/navigation";
-import React, { MutableRefObject, useState, useEffect } from "react";
+import React, { MutableRefObject } from "react";
 import ImageSection from "./ImageSection";
-// import Modal from '../../components/modal'
-// import { exampleCoverLetter } from '../../constants/index'
 
 type Props = {
   exampleRef: MutableRefObject<HTMLDivElement | null>;
 };
 
 const ImageSections = ({ exampleRef }: Props) => {
-  const [showModal, setShowModal] = useState<boolean>(false);
   const router = useRouter();
-
-  const handleExample = () => {
-    setShowModal(true);
-  };
 
   const handleCreate = () => {
     router.push("/create");
@@ -35,7 +28,6 @@ const ImageSections = ({ exampleRef }: Props) => {
       btnContent: "See example",
       src: "/images/tech-man.svg",
       reverse: true,
-      onClick: handleExample,
     },
   ];
   return (
@@ -43,9 +35,6 @@ const ImageSections = ({ exampleRef }: Props) => {
       {data.map((section, i) => (
         <ImageSection key={i} {...section} exampleRef={exampleRef} />
       ))}
-      {/* <div className="relative mt-10">
-      <Modal title="Example Cover Letter" showModal={showModal} setShowModal={setShowModal} text={exampleCoverLetter}/>
-      </div> */}
     </div>
   );
 };
