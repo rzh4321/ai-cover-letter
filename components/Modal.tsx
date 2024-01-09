@@ -70,7 +70,7 @@ export default function Modal({ title, text, btnContent } : ModalProps) {
                   {btnContent}
                 </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[800px] h-screen sm:h-auto">
+      <DialogContent className="sm:max-w-[800px] max-h-screen overflow-auto">
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
         </DialogHeader>
