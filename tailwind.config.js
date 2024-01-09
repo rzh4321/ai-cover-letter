@@ -2,10 +2,10 @@
 module.exports = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
   ],
   prefix: "",
   theme: {
@@ -18,7 +18,7 @@ module.exports = {
     },
     extend: {
       screens: {
-        'steps': '815px'
+        steps: "815px",
       },
       colors: {
         border: "hsl(var(--border))",
@@ -75,10 +75,10 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       fontFamily: {
-        primary: 'Sora',
-        secondary: 'Paytone One'
+        primary: "Sora",
+        secondary: "Paytone One",
       },
     },
   },
   plugins: [require("tailwindcss-animate")],
-}
+};
