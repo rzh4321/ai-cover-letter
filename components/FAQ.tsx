@@ -17,7 +17,7 @@ export default function FAQ() {
       <Accordion type="multiple" collapsible>
         <AccordionItem value="item-1">
           <AccordionTrigger>
-            <span className="bg-gradient-to-r from-blue-400 to-blue-500 dark:from-blue-300 dark:to-blue-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-300 dark:to-blue-400 bg-clip-text text-transparent">
             How does an AI generated cover letter work?
             </span>
             </AccordionTrigger>
@@ -27,7 +27,7 @@ export default function FAQ() {
         </AccordionItem>
         <AccordionItem value="item-2">
           <AccordionTrigger>
-          <span className="bg-gradient-to-r from-blue-400 to-blue-500 dark:from-blue-300 dark:to-blue-400 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-300 dark:to-blue-400 bg-clip-text text-transparent">
             Is it free?
             </span>
             </AccordionTrigger>
@@ -37,7 +37,7 @@ export default function FAQ() {
         </AccordionItem>
         <AccordionItem value="item-3">
           <AccordionTrigger>
-          <span className="bg-gradient-to-r from-blue-400 to-blue-500 dark:from-blue-300 dark:to-blue-400 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-300 dark:to-blue-400 bg-clip-text text-transparent">
             Is any of my information saved?
             </span>
             </AccordionTrigger>
@@ -47,7 +47,7 @@ export default function FAQ() {
         </AccordionItem>
         <AccordionItem value="item-4">
           <AccordionTrigger>
-          <span className="bg-gradient-to-r from-blue-400 to-blue-500 dark:from-blue-300 dark:to-blue-400 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-300 dark:to-blue-400 bg-clip-text text-transparent">
             How can I get in touch?
             </span>
             </AccordionTrigger>

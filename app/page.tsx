@@ -12,7 +12,6 @@ export default function Home() {
 
   return (
     <div>
-      <NavBar showCreate={true} />
       <Hero exampleRef={ref} />
       <ImageSections exampleRef={ref} />
       <FAQ />
