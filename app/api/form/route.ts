@@ -2,8 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
 import { formTypes } from "@/types";
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-
 type SubsetOf<T> = {
   [K in keyof T]?: T[K];
 };
@@ -26,6 +24,8 @@ export async function POST(req: Request) {
     // console.log('DATA IS ', data);
 
     //return NextResponse.json({error: 'sd'}, { status: 401});
+    const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+    console.log('key is ', process.env.OPENAI_API_KEY)
     const completion = await openai.chat.completions.create({
       messages: [{ role: "user", content: generatePrompt(data) }],
       model: "gpt-3.5-turbo",
@@ -59,6 +59,7 @@ export async function POST(req: Request) {
       { status: 201 },
     );
   } catch (e: any) {
+    console.log(e);
     return NextResponse.json(
       { error: e.error.code, desc: e.error.message },
       { status: 500 },
