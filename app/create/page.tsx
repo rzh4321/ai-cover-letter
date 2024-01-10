@@ -18,6 +18,7 @@ import TextAreaWithLimit from "@/components/TextAreaWIthLimit";
 import { useToast } from "@/components/ui/use-toast";
 import { useState } from "react";
 import { formTypes } from "@/types";
+import Image from "next/image";
 
 const formSchema = z.object({
   fullName: z
@@ -102,160 +103,188 @@ export default function Create() {
   }
   return (
     <div className="m-14">
-      <Form {...form}>
-        <h1 className="text-4xl md:text-6xl font-secondary py-2">
-          Tell us a bit about yourself
-        </h1>
-        <p>
-          The more questions you answer, the less generic the cover letter will
-          be!
-        </p>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8 my-10"
-        >
-          <FormField
-            control={form.control}
-            name="fullName"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Full name *</FormLabel>
-                <FormControl>
-                  <Input {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="mostRecentPosition"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Current position or most recent position</FormLabel>
-                <FormControl>
-                  <Input {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="skills"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Key skills</FormLabel>
-                <FormControl>
-                  <Input {...field} />
-                </FormControl>
-                <FormDescription>
-                  Enter as a comma separated list.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="accomplishmentsOrProjects"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Major accomplishments or projects</FormLabel>
-                <FormControl>
-                  <TextAreaWithLimit
-                    {...field}
-                    limit={600}
-                    sameLine={false}
-                    desc={
-                      "e.g. My efforts led to a 30% increase in user engagement, led a team that delivered a new product feature that boosted sales by 15%, etc."
-                    }
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <h1 className="text-4xl md:text-6xl font-secondary py-2">
-            Tell us about the job
-          </h1>
-          <p className="!mt-0">
-            Remember, the more questions you answer, the less generic the cover
-            letter will be!
-          </p>
+        <Form {...form}>
+            <div className="flex justify-between items-center">
+                <div>
+                    <h1 className="text-4xl md:text-6xl font-secondary py-2">
+                    Tell us a bit about yourself
+                    </h1>
+                    <p>
+                    The more questions you answer, the less generic the cover letter will
+                    be!
+                    </p>
+                </div>
+                <div>
+                    <Image
+                        src={'/images/info.svg'}
+                        alt={'image'}
+                        width={100}
+                        height={100}
+                        className="max-w-[450px] hidden md:block"
+                        loading="lazy"
+                    />
+                </div>
+            </div>
+            <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-8 my-10"
+            >
+            <FormField
+                control={form.control}
+                name="fullName"
+                render={({ field }) => (
+                <FormItem>
+                    <FormLabel>Full name *</FormLabel>
+                    <FormControl>
+                    <Input {...field} />
+                    </FormControl>
+                    <FormMessage />
+                </FormItem>
+                )}
+            />
+            <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                    <Input {...field} />
+                    </FormControl>
+                    <FormMessage />
+                </FormItem>
+                )}
+            />
+            <FormField
+                control={form.control}
+                name="mostRecentPosition"
+                render={({ field }) => (
+                <FormItem>
+                    <FormLabel>Current position or most recent position</FormLabel>
+                    <FormControl>
+                    <Input {...field} />
+                    </FormControl>
+                    <FormMessage />
+                </FormItem>
+                )}
+            />
+            <FormField
+                control={form.control}
+                name="skills"
+                render={({ field }) => (
+                <FormItem>
+                    <FormLabel>Key skills</FormLabel>
+                    <FormControl>
+                    <Input {...field} />
+                    </FormControl>
+                    <FormDescription>
+                    Enter as a comma separated list.
+                    </FormDescription>
+                    <FormMessage />
+                </FormItem>
+                )}
+            />
+            <FormField
+                control={form.control}
+                name="accomplishmentsOrProjects"
+                render={({ field }) => (
+                <FormItem>
+                    <FormLabel>Major accomplishments or projects</FormLabel>
+                    <FormControl>
+                    <TextAreaWithLimit
+                        {...field}
+                        limit={600}
+                        sameLine={false}
+                        desc={
+                        "e.g. My efforts led to a 30% increase in user engagement, led a team that delivered a new product feature that boosted sales by 15%, etc."
+                        }
+                    />
+                    </FormControl>
+                    <FormMessage />
+                </FormItem>
+                )}
+            />
+            <div className="flex justify-between">
+                <div>
+                <h1 className="text-4xl md:text-6xl font-secondary py-2">
+                    Tell us about the job
+                </h1>
+                    <p className="!mt-0">
+                        Remember, the more questions you answer, the less generic the cover
+                        letter will be!
+                    </p>
+                </div>
+                <div>
+                    <Image
+                        src={'/images/briefcase.svg'}
+                        alt={'image'}
+                        width={100}
+                        height={100}
+                        className="max-w-[450px] hidden md:block"
+                        loading="lazy"
+                    />
+                </div>
+            </div>
 
-          <FormField
-            control={form.control}
-            name="companyName"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Company *</FormLabel>
-                <FormControl>
-                  <Input {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+            <FormField
+                control={form.control}
+                name="companyName"
+                render={({ field }) => (
+                <FormItem>
+                    <FormLabel>Company *</FormLabel>
+                    <FormControl>
+                    <Input {...field} />
+                    </FormControl>
+                    <FormMessage />
+                </FormItem>
+                )}
+            />
 
-          <FormField
-            control={form.control}
-            name="positionApplyingFor"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Position *</FormLabel>
-                <FormControl>
-                  <Input {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+            <FormField
+                control={form.control}
+                name="positionApplyingFor"
+                render={({ field }) => (
+                <FormItem>
+                    <FormLabel>Position *</FormLabel>
+                    <FormControl>
+                    <Input {...field} />
+                    </FormControl>
+                    <FormMessage />
+                </FormItem>
+                )}
+            />
 
-          <FormField
-            control={form.control}
-            name="reasonForInterest"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Reason for interest</FormLabel>
-                <FormControl>
-                  <TextAreaWithLimit
-                    {...field}
-                    limit={200}
-                    sameLine={true}
-                    desc={"Why do you want to work here?"}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Modal
-            title={`${form.getValues(
-              "fullName",
-            )}'s Cover Letter for ${form.getValues("companyName")}`}
-            text={coverLetter}
-            btnContent="Generate"
-            isGenerateBtn={true}
-            isExample={false}
-            loading={loading}
-            disabled={!form.formState.isValid}
-          />
-        </form>
-      </Form>
+            <FormField
+                control={form.control}
+                name="reasonForInterest"
+                render={({ field }) => (
+                <FormItem>
+                    <FormLabel>Reason for interest</FormLabel>
+                    <FormControl>
+                    <TextAreaWithLimit
+                        {...field}
+                        limit={200}
+                        sameLine={true}
+                        desc={"Why do you want to work here?"}
+                    />
+                    </FormControl>
+                    <FormMessage />
+                </FormItem>
+                )}
+            />
+            <Modal
+                title={`${form.getValues(
+                "fullName",
+                )}'s Cover Letter for ${form.getValues("companyName")}`}
+                text={coverLetter}
+                btnContent="Generate"
+                isGenerateBtn={true}
+                isExample={false}
+                loading={loading}
+                disabled={!form.formState.isValid}
+            />
+            </form>
+        </Form>
     </div>
   );
 }
