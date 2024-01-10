@@ -12,7 +12,7 @@ import {
   AlertDialogTrigger,
   AlertDialogAction,
 } from "@/components/ui/alert-dialog";
-import { Check, Copy, Loader2 } from "lucide-react";
+// import { Check, Copy, Loader2 } from "lucide-react";
 import Loader from "./Loader";
 import CloseLetter from "./CloseLetter";
 
@@ -37,6 +37,7 @@ export default function Modal({
 }: ModalProps) {
   const [copied, setCopied] = useState(false);
   const ref = useRef<HTMLQuoteElement>(null);
+  console.log('text is ', text);
 
   const onCopy = () => {
     if (ref.current) {
@@ -100,7 +101,8 @@ export default function Modal({
         {loading ? (
           <>
             <Loader />
-            <Loader2 className="animate-spin mx-auto my-5 size-20 stroke-blue-500" />
+            {/* <Loader2 className="animate-spin mx-auto my-5 size-20 stroke-blue-500" /> */}
+            loading....
           </>
         ) : (
           <>
@@ -121,9 +123,11 @@ export default function Modal({
               className="absolute right-4 top-16 sm:top-10"
             >
               {copied ? (
-                <Check className="w-4 h-4" />
+                // <Check className="w-4 h-4" />
+                <span>copied</span>
               ) : (
-                <Copy className="w-4 h-4" />
+                // <Copy className="w-4 h-4" />
+                <span>copy</span>
               )}
             </Button>
             <div className="">

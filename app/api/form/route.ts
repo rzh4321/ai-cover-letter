@@ -25,7 +25,7 @@ export async function POST(req: Request) {
 
     //return NextResponse.json({error: 'sd'}, { status: 401});
     const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-    console.log('key is ', process.env.OPENAI_API_KEY)
+    console.log('key is ', process.env.OPENAI_API_KEY);
     const completion = await openai.chat.completions.create({
       messages: [{ role: "user", content: generatePrompt(data) }],
       model: "gpt-3.5-turbo",
