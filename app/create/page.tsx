@@ -190,7 +190,7 @@ export default function Create() {
             )}
           />
           <h1 className="text-4xl md:text-6xl font-secondary py-2">
-            Tell us a bit about the company
+            Tell us about the job
           </h1>
           <p className="!mt-0">
             Remember, the more questions you answer, the less generic the cover

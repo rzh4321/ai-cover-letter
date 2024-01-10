@@ -1,20 +1,31 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { Textarea } from "./ui/textarea";
 import { FormDescription } from "./ui/form";
+// import { TextareaProps } from "./ui/textarea";
+import { ControllerRenderProps } from "react-hook-form";
 
-type fieldProps = {
-  "aria-describedBy" : string;
-  "aria-invalid": boolean;
-  id: string;
-  name: string;
-  onBlur: () => void;
-  onChange: (e: any) => void;
-  value: string;
-}
+// type fieldProps = {
+//   "aria-describedBy": string;
+//   "aria-invalid": boolean;
+//   id: string;
+//   name: string;
+//   onBlur: () => void;
+//   onChange: (e: any) => void;
+//   value: string;
+// };
 
-interface TextAreaWithLimitProps extends fieldProps {
+interface TextAreaWithLimitProps extends ControllerRenderProps<{
+  fullName: string;
+  email: string;
+  companyName: string;
+  positionApplyingFor: string;
+  mostRecentPosition: string;
+  skills: string;
+  accomplishmentsOrProjects: string;
+  reasonForInterest: string;
+}, "accomplishmentsOrProjects"> {
   limit: number;
   desc: string;
   sameLine: boolean;
@@ -34,9 +45,7 @@ const TextAreaWithLimit = ({
       >
         <span>{desc}</span>
         <span
-          className={`self-end ${
-            +field.value.length > 600 ? "text-red-600" : null
-          }`}
+          className={`self-end ${+field.value.length > 600 ? "text-red-600" : ""}`}
         >
           {field.value.length}/{limit}
         </span>
