@@ -25,7 +25,7 @@ interface TextAreaWithLimitProps extends ControllerRenderProps<{
   skills: string;
   accomplishmentsOrProjects: string;
   reasonForInterest: string;
-}, "accomplishmentsOrProjects"> {
+}, "accomplishmentsOrProjects" | "reasonForInterest"> {
   limit: number;
   desc: string;
   sameLine: boolean;
