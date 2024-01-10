@@ -13,7 +13,8 @@ type ImageSectionProps = {
   onClick?: () => void;
 };
 
-const exampleCoverLetter = "Dear Hiring Manager,\n\n\tI am John Doe, a passionate software engineer with a robust five-year track record in the tech industry. My experience spans from developing high-traffic social media features at TechSolutions Inc. to contributing to widely-used open-source projects. The prospect of joining Twitter, a company at the vanguard of social media innovation, is an opportunity that excites me greatly.\n\n\tAt TechSolutions Inc., my efforts led to a 30% increase in user engagement, and my work on scalable software architecture has been adopted by numerous global companies. These accomplishments underscore my commitment to creating impactful user experiences and my readiness to tackle the unique challenges at Twitter.\n\n\tI am adept at problem-solving and thrive in fast-paced environments, qualities that I understand are valued at Twitter. My technical skills, combined with a proven ability to work collaboratively, make me a strong candidate for the Software Engineer role. I am eager to contribute to Twitter's mission to enrich public conversation and believe that my background aligns well with your team's goals.\n\n\tThank you for considering my application. I look forward to the possibility of discussing how my skills and experiences can help drive Twitter's success.\n\nSincerely,\nJohn Doe";
+const exampleCoverLetter =
+  "Dear Hiring Manager,\n\n\tI am John Doe, a passionate software engineer with a robust five-year track record in the tech industry. My experience spans from developing high-traffic social media features at TechSolutions Inc. to contributing to widely-used open-source projects. The prospect of joining Twitter, a company at the vanguard of social media innovation, is an opportunity that excites me greatly.\n\n\tAt TechSolutions Inc., my efforts led to a 30% increase in user engagement, and my work on scalable software architecture has been adopted by numerous global companies. These accomplishments underscore my commitment to creating impactful user experiences and my readiness to tackle the unique challenges at Twitter.\n\n\tI am adept at problem-solving and thrive in fast-paced environments, qualities that I understand are valued at Twitter. My technical skills, combined with a proven ability to work collaboratively, make me a strong candidate for the Software Engineer role. I am eager to contribute to Twitter's mission to enrich public conversation and believe that my background aligns well with your team's goals.\n\n\tThank you for considering my application. I look forward to the possibility of discussing how my skills and experiences can help drive Twitter's success.\n\nSincerely,\nJohn Doe";
 
 const ImageSection = ({
   title,
@@ -41,16 +42,21 @@ const ImageSection = ({
           </span>
         </h2>
         <p className="text-left w-11/12 max-w-[600px] md:py-4 my-4">{text}</p>
-        {btnContent === "See example" ? <Modal title="Example Cover Letter" text={exampleCoverLetter} btnContent={btnContent} isGenerateBtn={false} />
- : (
-                  <Button
-                  onClick={onClick}
-                  className={`md:p-6 md:text-lg duration-200 text-center border-2`}
-                >
-                  {btnContent}
-                </Button>
-                )
-        }
+        {btnContent === "See example" ? (
+          <Modal
+            title="Example Cover Letter"
+            text={exampleCoverLetter}
+            btnContent={btnContent}
+            isGenerateBtn={false}
+          />
+        ) : (
+          <Button
+            onClick={onClick}
+            className={`md:p-6 md:text-lg duration-200 text-center border-2`}
+          >
+            {btnContent}
+          </Button>
+        )}
       </div>
       <Image
         src={src}

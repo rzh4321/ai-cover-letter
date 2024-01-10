@@ -1,114 +1,147 @@
-'use client';
+"use client";
 
 import { Button } from "@/components/ui/button";
 import { useState, useRef } from "react";
 import {
-  Dialog,
-  DialogContent,
-  DialogClose,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { Check, Copy, Loader2 } from "lucide-react";
-import Loader from './Loader';
+import Loader from "./Loader";
+import CloseLetter from "./CloseLetter";
 
 type ModalProps = {
-    title: String;
-    text: string | null;
-    btnContent: String;
-    isGenerateBtn: boolean;
-    loading?: boolean;
-    disabled?: boolean;
-}
+  title: String;
+  text: string | null;
+  btnContent: String;
+  isGenerateBtn: boolean;
+  loading?: boolean;
+  disabled?: boolean;
+};
 
-export default function Modal({ title, text, btnContent, isGenerateBtn, loading, disabled } : ModalProps) {
-    const [copied, setCopied] = useState(false);
-    const ref = useRef<HTMLQuoteElement>(null);
-    
-    const onCopy = () => {
-        if (ref.current) {
-            const selection = window.getSelection();
-            const range = document.createRange();
-            // manually select the text to copy in order to preserve whitespaces
-            range.selectNodeContents(ref.current);
-            selection?.removeAllRanges();
-            selection?.addRange(range);
-            const inp = selection?.toString() || '';            
-            navigator.clipboard.writeText(inp);
-            selection?.removeAllRanges();
-            setCopied(true);
-        
-            setTimeout(() => {
-            setCopied(false); // icon changes after 1 second
-            }, 1000);
-            }
-      };
+export default function Modal({
+  title,
+  text,
+  btnContent,
+  isGenerateBtn,
+  loading,
+  disabled,
+}: ModalProps) {
+  const [copied, setCopied] = useState(false);
+  const ref = useRef<HTMLQuoteElement>(null);
 
-      const insertTabAtCursor = () => {
-        const tabCharacter = '\t';
-        const selection = window.getSelection();
-        if (selection && selection.rangeCount > 0) {
-          const range = selection.getRangeAt(0);
-          range.deleteContents();
-          range.insertNode(document.createTextNode(tabCharacter));
-          range.setStart(range.endContainer, range.endOffset);
-          selection.removeAllRanges();
-          selection.addRange(range);
-        }
-      };
-    
-      const handleKeyDown = (event: React.KeyboardEvent<HTMLQuoteElement>) => {
-        if (event.key === 'Tab') {
-          event.preventDefault();
-          insertTabAtCursor();
-        }
-      };
+  const onCopy = () => {
+    if (ref.current) {
+      const selection = window.getSelection();
+      const range = document.createRange();
+      // manually select the text to copy in order to preserve whitespaces
+      range.selectNodeContents(ref.current);
+      selection?.removeAllRanges();
+      selection?.addRange(range);
+      const inp = selection?.toString() || "";
+      navigator.clipboard.writeText(inp);
+      selection?.removeAllRanges();
+      setCopied(true);
 
-      if (disabled) {
-        return (
-          <Button variant={'generate'}
-          >
-            {btnContent}
-          </Button>
-        )
-      }
+      setTimeout(() => {
+        setCopied(false); // icon changes after 1 second
+      }, 1000);
+    }
+  };
+
+  const insertTabAtCursor = () => {
+    const tabCharacter = "\t";
+    const selection = window.getSelection();
+    if (selection && selection.rangeCount > 0) {
+      const range = selection.getRangeAt(0);
+      range.deleteContents();
+      range.insertNode(document.createTextNode(tabCharacter));
+      range.setStart(range.endContainer, range.endOffset);
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLQuoteElement>) => {
+    if (event.key === "Tab") {
+      event.preventDefault();
+      insertTabAtCursor();
+    }
+  };
+
+  if (disabled) {
+    return <Button variant={"generate"}>{btnContent}</Button>;
+  }
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-      <Button type={isGenerateBtn ? 'submit' : 'button'} variant={isGenerateBtn ? 'generate' : 'default'} className={`${isGenerateBtn ? null :'md:p-6 md:text-lg duration-200 text-center border-2'}`}
-                >
-                  {btnContent}
-                </Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-[800px] max-h-screen overflow-auto">
-        {loading ? <><Loader /><Loader2 className="animate-spin mx-auto my-5 size-20 stroke-blue-500" /></> : (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button
+          type={isGenerateBtn ? "submit" : "button"}
+          variant={isGenerateBtn ? "generate" : "default"}
+          className={`${
+            isGenerateBtn
+              ? null
+              : "md:p-6 md:text-lg duration-200 text-center border-2"
+          }`}
+        >
+          {btnContent}
+        </Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent className="sm:max-w-[800px] max-h-screen overflow-auto">
+        {loading ? (
           <>
-            <DialogHeader>
-              <DialogTitle className="p-2 text-center">{title}</DialogTitle>
-            </DialogHeader>
-            <Button onClick={onCopy} size="icon" variant={"outline"} className="absolute right-4 top-16 sm:top-10">
-                  {copied 
-                    ? <Check className="w-4 h-4" /> 
-                    : <Copy className="w-4 h-4" />
-                  }
-                </Button>
+            <Loader />
+            <Loader2 className="animate-spin mx-auto my-5 size-20 stroke-blue-500" />
+          </>
+        ) : (
+          <>
+            <AlertDialogHeader>
+              <AlertDialogTitle className="p-2 text-center">
+                {title}
+              </AlertDialogTitle>
+              <AlertDialogDescription className="px-10 text-center text-xs">
+                * The AI is likely to make up details if you did not provide
+                sufficient information. It is highly recommended to make any
+                necessary adjustments.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <Button
+              onClick={onCopy}
+              size="icon"
+              variant={"outline"}
+              className="absolute right-4 top-16 sm:top-10"
+            >
+              {copied ? (
+                <Check className="w-4 h-4" />
+              ) : (
+                <Copy className="w-4 h-4" />
+              )}
+            </Button>
             <div className="">
-                <blockquote onKeyDown={handleKeyDown} ref={ref} suppressContentEditableWarning={true} contentEditable="true" className="whitespace-pre-wrap text-sm leading-relaxed mt-8 mx-6 p-10 md:p-4 max-h-[580px] overflow-auto">
-                    {text}
-                </blockquote>
+              <blockquote
+                onKeyDown={handleKeyDown}
+                ref={ref}
+                suppressContentEditableWarning={true}
+                contentEditable="true"
+                className="whitespace-pre-wrap text-sm leading-relaxed mt-8 mx-6 p-10 md:p-4 max-h-[580px] overflow-auto"
+              >
+                {text}
+              </blockquote>
             </div>
           </>
-          
         )}
-        <DialogFooter>
-            <DialogClose asChild>
-            <Button type="button" variant={'secondary'}>Close</Button>
-            </DialogClose>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
-  )
+        <AlertDialogFooter>
+          <CloseLetter />
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  );
 }
