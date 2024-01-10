@@ -8,7 +8,7 @@ export default function Loader() {
   const [progress, setProgress] = React.useState(13);
 
   React.useEffect(() => {
-    const timer = setTimeout(() => setProgress(66), 3000);
+    const timer = setTimeout(() => setProgress(66), 4000);
     return () => clearTimeout(timer);
   }, []);
 

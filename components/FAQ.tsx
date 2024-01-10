@@ -14,7 +14,7 @@ export default function FAQ() {
           Questions
         </span>
       </h3>
-      <Accordion type="multiple" collapsible>
+      <Accordion type="multiple">
         <AccordionItem value="item-1">
           <AccordionTrigger>
             <span className="bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-300 dark:to-blue-400 bg-clip-text text-transparent">

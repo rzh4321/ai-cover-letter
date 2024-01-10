@@ -68,7 +68,7 @@ export default function Create() {
   const [loading, setLoading] = useState(false);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log("values is ", values);
+    // console.log("values is ", values);
     // get rid of all keys that are empty
     Object.keys(values).forEach((key) => {
       const validKey = key as keyof formTypes;

@@ -4,16 +4,28 @@ import React, { useState } from "react";
 import { Textarea } from "./ui/textarea";
 import { FormDescription } from "./ui/form";
 
+type fieldProps = {
+  "aria-describedBy" : string;
+  "aria-invalid": boolean;
+  id: string;
+  name: string;
+  onBlur: () => void;
+  onChange: (e: any) => void;
+  value: string;
+}
+
+interface TextAreaWithLimitProps extends fieldProps {
+  limit: number;
+  desc: string;
+  sameLine: boolean;
+}
+
 const TextAreaWithLimit = ({
   limit,
   desc,
   sameLine,
   ...field
-}: {
-  limit: number;
-  desc: string;
-  sameLine: boolean;
-}) => {
+}: TextAreaWithLimitProps) => {
   return (
     <>
       <Textarea {...field} className="max-h-[200px]" />
