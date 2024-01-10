@@ -3,7 +3,9 @@
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
+import Modal from "@/components/Modal";
+import Loader from "@/components/Loader";
 import {
   Form,
   FormControl,
@@ -17,17 +19,18 @@ import { Input } from "@/components/ui/input";
 import TextAreaWithLimit from "@/components/TextAreaWIthLimit";
 import { useToast } from "@/components/ui/use-toast";
 import { useState } from "react";
+import { formTypes } from "@/types";
 
 
 const formSchema = z.object({
-    fullName: z.string().min(1, {message: "Name is required"}).max(25, {message: "Full name cannot exceed 25 characters"}),
-    email: z.string().email().or(z.string().length(0)).optional(),
-    companyName: z.string().min(1, {message: "Company name is required"}),
-    position: z.string().min(1, {message: "Position is required"}),
-    mostRecentPosition: z.string(),
-    skills: z.string().max(150, {message: "Skills are too long. Only include key skills"}),
-    accomplishments: z.string().max(600, {message: "Accomplishments exceed 800 characters"}),
-    reason: z.string().max(200, {message: "Reason cannot exceed 200 characters"}),
+    fullName: z.string().trim().min(1, {message: "Name is required"}).max(25, {message: "Full name cannot exceed 25 characters"}),
+    email: z.string().trim().email().or(z.string().length(0)),
+    companyName: z.string().trim().min(1, {message: "Company name is required"}),
+    positionApplyingFor: z.string().trim().min(1, {message: "Position is required"}),
+    mostRecentPosition: z.string().trim(),
+    skills: z.string().trim().max(150, {message: "Skills are too long. Only include key skills"}),
+    accomplishmentsOrProjects: z.string().trim().max(600, {message: "Accomplishments cannot exceed 600 characters"}),
+    reasonForInterest: z.string().trim().max(200, {message: "Reason cannot exceed 200 characters"}),
 })
 
 export default function Create() {
@@ -37,20 +40,28 @@ export default function Create() {
           fullName: "",
           email: "",
           companyName: "",
-          position: "",
+          positionApplyingFor: "",
           mostRecentPosition: "",
           skills: "",
-          accomplishments: "",
-          reason: "",
+          accomplishmentsOrProjects: "",
+          reasonForInterest: "",
         },
-      })
+      });
       const {toast } = useToast();
       const [coverLetter, setCoverLetter] = useState<string | null>(null);
       const [loading, setLoading] = useState(false);
 
       async function onSubmit(values: z.infer<typeof formSchema>) {
+        console.log('values is ', values);
+        // get rid of all keys that are empty
+        Object.keys(values).forEach((key) => {
+            const validKey = key as keyof formTypes;
+                values[validKey] = values[validKey].trim();
+                if (values[validKey] === '') {
+                  delete values[validKey];
+                }      
+          });
         setLoading(true);
-        console.log(values);
         const resp = await fetch('/api/form', {
             method: 'POST',
             headers: {
@@ -66,12 +77,13 @@ export default function Create() {
               })
         }
         else {
-            console.log('data is ', data);
+           // console.log('data is ', data);
             setCoverLetter(data.result)
-            setLoading(false)
         }
+        setTimeout(() => {
+            setLoading(false)
+        }, 4000);
       }
-
       return (
         <div className="m-14">
         <Form {...form}>
@@ -135,7 +147,7 @@ export default function Create() {
             />
             <FormField
               control={form.control}
-              name="accomplishments"
+              name="accomplishmentsOrProjects"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Major accomplishments or projects</FormLabel>
@@ -165,7 +177,7 @@ export default function Create() {
 
             <FormField
               control={form.control}
-              name="position"
+              name="positionApplyingFor"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Position *</FormLabel>
@@ -179,7 +191,7 @@ export default function Create() {
 
             <FormField
               control={form.control}
-              name="reason"
+              name="reasonForInterest"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Reason for interest</FormLabel>
@@ -190,7 +202,7 @@ export default function Create() {
                 </FormItem>
               )}
             />
-            <Button variant={'generate'} type="submit">Generate</Button>
+            <Modal title={`${form.getValues('fullName')}'s Cover Letter for ${form.getValues('companyName')}`} text={coverLetter} btnContent='Generate' isGenerateBtn={true} loading={loading} disabled={!form.formState.isValid} />
           </form>
         </Form>
 

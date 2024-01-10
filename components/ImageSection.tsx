@@ -41,7 +41,7 @@ const ImageSection = ({
           </span>
         </h2>
         <p className="text-left w-11/12 max-w-[600px] md:py-4 my-4">{text}</p>
-        {btnContent === "See example" ? <Modal title="Example Cover Letter" text={exampleCoverLetter} btnContent={btnContent} />
+        {btnContent === "See example" ? <Modal title="Example Cover Letter" text={exampleCoverLetter} btnContent={btnContent} isGenerateBtn={false} />
  : (
                   <Button
                   onClick={onClick}
