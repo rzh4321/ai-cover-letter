@@ -250,6 +250,7 @@ export default function Create() {
             text={coverLetter}
             btnContent="Generate"
             isGenerateBtn={true}
+            isExample={false}
             loading={loading}
             disabled={!form.formState.isValid}
           />

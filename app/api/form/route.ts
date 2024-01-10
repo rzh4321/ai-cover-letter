@@ -25,7 +25,7 @@ export async function POST(req: Request) {
     const data = await req.json();
     // console.log('DATA IS ', data);
 
-    // return NextResponse.json({error: 'sd'}, { status: 401});
+    //return NextResponse.json({error: 'sd'}, { status: 401});
     const completion = await openai.chat.completions.create({
       messages: [{ role: "user", content: generatePrompt(data) }],
       model: "gpt-3.5-turbo",

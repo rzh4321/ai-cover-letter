@@ -4,14 +4,13 @@ import { Button } from "@/components/ui/button";
 import { useState, useRef } from "react";
 import {
   AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
+  AlertDialogAction,
 } from "@/components/ui/alert-dialog";
 import { Check, Copy, Loader2 } from "lucide-react";
 import Loader from "./Loader";
@@ -22,6 +21,7 @@ type ModalProps = {
   text: string | null;
   btnContent: String;
   isGenerateBtn: boolean;
+  isExample: boolean;
   loading?: boolean;
   disabled?: boolean;
 };
@@ -31,6 +31,7 @@ export default function Modal({
   text,
   btnContent,
   isGenerateBtn,
+  isExample,
   loading,
   disabled,
 }: ModalProps) {
@@ -108,9 +109,9 @@ export default function Modal({
                 {title}
               </AlertDialogTitle>
               <AlertDialogDescription className="px-10 text-center text-xs">
-                * The AI is likely to make up details if you did not provide
+                {`* The AI is likely to make up details if you ${isExample ? 'do' : 'did'} not provide
                 sufficient information. It is highly recommended to make any
-                necessary adjustments.
+                necessary adjustments.`}
               </AlertDialogDescription>
             </AlertDialogHeader>
             <Button
@@ -139,7 +140,7 @@ export default function Modal({
           </>
         )}
         <AlertDialogFooter>
-          <CloseLetter />
+          {isExample ? <AlertDialogAction asChild><Button type="button">Close</Button></AlertDialogAction> : <CloseLetter />}
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

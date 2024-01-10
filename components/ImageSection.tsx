@@ -48,6 +48,7 @@ const ImageSection = ({
             text={exampleCoverLetter}
             btnContent={btnContent}
             isGenerateBtn={false}
+            isExample={true}
           />
         ) : (
           <Button
