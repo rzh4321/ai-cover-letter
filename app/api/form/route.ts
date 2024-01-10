@@ -8,6 +8,8 @@ type SubsetOf<T> = {
 
 type dataType = SubsetOf<formTypes>;
 
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
 function generatePrompt(data: dataType) {
   const objString = Object.entries(data)
     .map(([key, value]) => `${key}: "${value}"`)
@@ -22,16 +24,17 @@ export async function POST(req: Request) {
   try {
     const data = await req.json();
     // console.log('DATA IS ', data);
+    // console.time('apiCallTimer');
 
     //return NextResponse.json({error: 'sd'}, { status: 401});
-    const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-    console.log('key is ', process.env.OPENAI_API_KEY);
     const completion = await openai.chat.completions.create({
       messages: [{ role: "user", content: generatePrompt(data) }],
       model: "gpt-3.5-turbo",
       temperature: 0.7,
       max_tokens: 400,
     });
+    // console.timeEnd('apiCallTimer'); // This will log the time difference
+
     // const completion = {
     //   "id": "chatcmpl-123",
     //   "object": "chat.completion",
